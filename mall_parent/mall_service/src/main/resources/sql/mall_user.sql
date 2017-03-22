@@ -1,8 +1,36 @@
-INSERT INTO `mall_user` (`ID`, `USER_ID`, `USER_NAME`, `NICK_NAME`, `BRITH_DATE`, `CTEATE_DATE`, `USER_PASSWOED`, `USER_PHOTO`, `USER_LEVE`, `USER_PHONE`, `USER_ACCOUNT`, `ACCOUNT_TYPE`) VALUES (5, 'eq17mYQh', '张三', NULL, NULL, '2017-3-20 10:40:08', '9ShUzJmuHBlmsKIdASeXWw==', 'http://', 1, NULL, '12345@qq.com', 0);
-INSERT INTO `mall_user` (`ID`, `USER_ID`, `USER_NAME`, `NICK_NAME`, `BRITH_DATE`, `CTEATE_DATE`, `USER_PASSWOED`, `USER_PHOTO`, `USER_LEVE`, `USER_PHONE`, `USER_ACCOUNT`, `ACCOUNT_TYPE`) VALUES (6, '5elkfcyi', '张三丰', NULL, NULL, '2017-3-20 18:24:20', '6Afx/PgtEy+bsBjKZzihnw==', 'http://', 1, NULL, '123456@qq.com', 1);
-INSERT INTO `mall_user` (`ID`, `USER_ID`, `USER_NAME`, `NICK_NAME`, `BRITH_DATE`, `CTEATE_DATE`, `USER_PASSWOED`, `USER_PHOTO`, `USER_LEVE`, `USER_PHONE`, `USER_ACCOUNT`, `ACCOUNT_TYPE`) VALUES (7, 'BAKGXiJb', '张三丰', NULL, NULL, '2017-3-20 18:24:49', '6Afx/PgtEy+bsBjKZzihnw==', 'http://', 1, NULL, '1234561234@qq.com', 1);
-INSERT INTO `mall_user` (`ID`, `USER_ID`, `USER_NAME`, `NICK_NAME`, `BRITH_DATE`, `CTEATE_DATE`, `USER_PASSWOED`, `USER_PHOTO`, `USER_LEVE`, `USER_PHONE`, `USER_ACCOUNT`, `ACCOUNT_TYPE`) VALUES (8, 'Juvw4PrR', '赵四', NULL, NULL, '2017-3-21 09:11:26', '4QrcOUm6Wau+VuBX8g+IPg==', 'http://', 1, NULL, '1451899787@qq.com', 1);
-INSERT INTO `mall_user` (`ID`, `USER_ID`, `USER_NAME`, `NICK_NAME`, `BRITH_DATE`, `CTEATE_DATE`, `USER_PASSWOED`, `USER_PHOTO`, `USER_LEVE`, `USER_PHONE`, `USER_ACCOUNT`, `ACCOUNT_TYPE`) VALUES (9, 'wIhCHPId', '11', NULL, NULL, '2017-3-21 11:01:48', 'ZRK9Q9nKpuAsmQsKgmUtyg==', 'http://', 1, NULL, '11', 1);
-INSERT INTO `mall_user` (`ID`, `USER_ID`, `USER_NAME`, `NICK_NAME`, `BRITH_DATE`, `CTEATE_DATE`, `USER_PASSWOED`, `USER_PHOTO`, `USER_LEVE`, `USER_PHONE`, `USER_ACCOUNT`, `ACCOUNT_TYPE`) VALUES (10, 'MUmBZdJ1', '账单', NULL, NULL, '2017-3-21 18:14:00', 'tZxnvxlqR1gZHkL3ZnDOug==', 'http://', 1, NULL, '11111@qq.com', 1);
-INSERT INTO `mall_user` (`ID`, `USER_ID`, `USER_NAME`, `NICK_NAME`, `BRITH_DATE`, `CTEATE_DATE`, `USER_PASSWOED`, `USER_PHOTO`, `USER_LEVE`, `USER_PHONE`, `USER_ACCOUNT`, `ACCOUNT_TYPE`) VALUES (11, 'EZFGwHW7', '谷哥', NULL, NULL, '2017-3-22 10:05:05', '4QrcOUm6Wau+VuBX8g+IPg==', 'http://', 1, NULL, 'google@go.com', 1);
-INSERT INTO `mall_user` (`ID`, `USER_ID`, `USER_NAME`, `NICK_NAME`, `BRITH_DATE`, `CTEATE_DATE`, `USER_PASSWOED`, `USER_PHOTO`, `USER_LEVE`, `USER_PHONE`, `USER_ACCOUNT`, `ACCOUNT_TYPE`) VALUES (12, 'DNGh5d4P', '鲁大师', NULL, NULL, '2017-3-22 10:11:02', '4QrcOUm6Wau+VuBX8g+IPg==', 'http://', 1, NULL, 'ludashi@lu.com', 1);
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : 本地
+Source Server Version : 50022
+Source Host           : 127.0.0.1:3306
+Source Database       : test
+
+Target Server Type    : MYSQL
+Target Server Version : 50022
+File Encoding         : 65001
+
+Date: 2017-03-22 15:14:43
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for mall_user
+-- ----------------------------
+DROP TABLE IF EXISTS `mall_user`;
+CREATE TABLE `mall_user` (
+  `ID` bigint(20) NOT NULL auto_increment,
+  `USER_ID` varchar(30) NOT NULL COMMENT '用户id',
+  `USER_NAME` varchar(30) NOT NULL COMMENT '用户姓名',
+  `NICK_NAME` varchar(30) default NULL COMMENT '昵称',
+  `BRITH_DATE` datetime default NULL COMMENT '用户出生年月',
+  `CTEATE_DATE` datetime NOT NULL COMMENT '创建时间',
+  `USER_PASSWOED` varchar(50) NOT NULL COMMENT '用户密码',
+  `USER_PHOTO` varchar(255) NOT NULL COMMENT '用户图像',
+  `USER_LEVE` int(5) NOT NULL COMMENT '用户等级',
+  `USER_PHONE` varchar(30) default NULL COMMENT '用户电话号码',
+  `USER_ACCOUNT` varchar(50) NOT NULL COMMENT '用户账号',
+  `ACCOUNT_TYPE` int(10) NOT NULL COMMENT '账号类型(0:手机号码1:邮箱)',
+  PRIMARY KEY  (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
