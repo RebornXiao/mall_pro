@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsyl.mall.dao.MallGoodsSalesMapper" >
+  <resultMap id="BaseResultMap" type="com.hsyl.mall.pojo.MallGoodsSales" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="GOODS_ID" property="goodsId" jdbcType="INTEGER" />
+    <result column="GOODS_TYPE" property="goodsType" jdbcType="VARCHAR" />
+    <result column="SALES_AMOUNT" property="salesAmount" jdbcType="BIGINT" />
+    <result column="SALES_SURPLUS" property="salesSurplus" jdbcType="BIGINT" />
+    <result column="GOODS_SALARY" property="goodsSalary" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, GOODS_ID, GOODS_TYPE, SALES_AMOUNT, SALES_SURPLUS, GOODS_SALARY
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from mall_goods_sales
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from mall_goods_sales
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hsyl.mall.pojo.MallGoodsSales" >
+    insert into mall_goods_sales (ID, GOODS_ID, GOODS_TYPE, 
+      SALES_AMOUNT, SALES_SURPLUS, GOODS_SALARY
+      )
+    values (#{id,jdbcType=BIGINT}, #{goodsId,jdbcType=INTEGER}, #{goodsType,jdbcType=VARCHAR}, 
+      #{salesAmount,jdbcType=BIGINT}, #{salesSurplus,jdbcType=BIGINT}, #{goodsSalary,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hsyl.mall.pojo.MallGoodsSales" >
+    insert into mall_goods_sales
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="goodsId != null" >
+        GOODS_ID,
+      </if>
+      <if test="goodsType != null" >
+        GOODS_TYPE,
+      </if>
+      <if test="salesAmount != null" >
+        SALES_AMOUNT,
+      </if>
+      <if test="salesSurplus != null" >
+        SALES_SURPLUS,
+      </if>
+      <if test="goodsSalary != null" >
+        GOODS_SALARY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsType != null" >
+        #{goodsType,jdbcType=VARCHAR},
+      </if>
+      <if test="salesAmount != null" >
+        #{salesAmount,jdbcType=BIGINT},
+      </if>
+      <if test="salesSurplus != null" >
+        #{salesSurplus,jdbcType=BIGINT},
+      </if>
+      <if test="goodsSalary != null" >
+        #{goodsSalary,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hsyl.mall.pojo.MallGoodsSales" >
+    update mall_goods_sales
+    <set >
+      <if test="goodsId != null" >
+        GOODS_ID = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsType != null" >
+        GOODS_TYPE = #{goodsType,jdbcType=VARCHAR},
+      </if>
+      <if test="salesAmount != null" >
+        SALES_AMOUNT = #{salesAmount,jdbcType=BIGINT},
+      </if>
+      <if test="salesSurplus != null" >
+        SALES_SURPLUS = #{salesSurplus,jdbcType=BIGINT},
+      </if>
+      <if test="goodsSalary != null" >
+        GOODS_SALARY = #{goodsSalary,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hsyl.mall.pojo.MallGoodsSales" >
+    update mall_goods_sales
+    set GOODS_ID = #{goodsId,jdbcType=INTEGER},
+      GOODS_TYPE = #{goodsType,jdbcType=VARCHAR},
+      SALES_AMOUNT = #{salesAmount,jdbcType=BIGINT},
+      SALES_SURPLUS = #{salesSurplus,jdbcType=BIGINT},
+      GOODS_SALARY = #{goodsSalary,jdbcType=DOUBLE}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

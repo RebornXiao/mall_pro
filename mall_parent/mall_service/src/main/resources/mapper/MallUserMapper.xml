@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsyl.mall.dao.MallUserMapper" >
+  <resultMap id="BaseResultMap" type="com.hsyl.mall.pojo.MallUser" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+    <result column="NICK_NAME" property="nickName" jdbcType="VARCHAR" />
+    <result column="BRITH_DATE" property="brithDate" jdbcType="TIMESTAMP" />
+    <result column="CTEATE_DATE" property="cteateDate" jdbcType="TIMESTAMP" />
+    <result column="USER_PASSWOED" property="userPasswoed" jdbcType="VARCHAR" />
+    <result column="USER_PHOTO" property="userPhoto" jdbcType="VARCHAR" />
+    <result column="USER_LEVE" property="userLeve" jdbcType="INTEGER" />
+    <result column="USER_PHONE" property="userPhone" jdbcType="VARCHAR" />
+    <result column="USER_ACCOUNT" property="userAccount" jdbcType="VARCHAR" />
+    <result column="ACCOUNT_TYPE" property="accountType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USER_ID, USER_NAME, NICK_NAME, BRITH_DATE, CTEATE_DATE, USER_PASSWOED, USER_PHOTO, 
+    USER_LEVE, USER_PHONE, USER_ACCOUNT, ACCOUNT_TYPE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from mall_user
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectUserAccount"  parameterType="java.lang.String" resultType="java.lang.Integer">
+  	select count(ID)
+    from mall_user
+    where USER_ACCOUNT = #{userAccount,jdbcType=VARCHAR}
+  </select>
+  <select id="selectUserIsExist"  parameterType="java.util.Map" resultType="java.lang.Integer">
+  	select count(ID)
+    from mall_user
+    where USER_ACCOUNT = #{userAccount,jdbcType=VARCHAR} AND USER_PASSWOED = #{userPasswoed,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from mall_user
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hsyl.mall.pojo.MallUser" >
+    insert into mall_user 
+    (ID, USER_ID, USER_NAME,NICK_NAME, BRITH_DATE, CTEATE_DATE,USER_PASSWOED, USER_PHOTO,USER_LEVE,USER_PHONE,USER_ACCOUNT,ACCOUNT_TYPE)
+    values 
+     (#{id,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{nickName,jdbcType=VARCHAR}, #{brithDate,jdbcType=TIMESTAMP}, #{cteateDate,jdbcType=TIMESTAMP}, 
+      #{userPasswoed,jdbcType=VARCHAR}, #{userPhoto,jdbcType=VARCHAR}, #{userLeve,jdbcType=INTEGER}, 
+      #{userPhone,jdbcType=VARCHAR}, #{userAccount,jdbcType=VARCHAR}, #{accountType,jdbcType=INTEGER}
+     )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hsyl.mall.pojo.MallUser" >
+    insert into mall_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
+      <if test="nickName != null" >
+        NICK_NAME,
+      </if>
+      <if test="brithDate != null" >
+        BRITH_DATE,
+      </if>
+      <if test="cteateDate != null" >
+        CTEATE_DATE,
+      </if>
+      <if test="userPasswoed != null" >
+        USER_PASSWOED,
+      </if>
+      <if test="userPhoto != null" >
+        USER_PHOTO,
+      </if>
+      <if test="userLeve != null" >
+        USER_LEVE,
+      </if>
+      <if test="userPhone != null" >
+        USER_PHONE,
+      </if>
+      <if test="userAccount != null" >
+        USER_ACCOUNT,
+      </if>
+      <if test="accountType != null" >
+        ACCOUNT_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="brithDate != null" >
+        #{brithDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cteateDate != null" >
+        #{cteateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userPasswoed != null" >
+        #{userPasswoed,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhoto != null" >
+        #{userPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="userLeve != null" >
+        #{userLeve,jdbcType=INTEGER},
+      </if>
+      <if test="userPhone != null" >
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userAccount != null" >
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null" >
+        #{accountType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hsyl.mall.pojo.MallUser" >
+    update mall_user
+    <set >
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        NICK_NAME = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="brithDate != null" >
+        BRITH_DATE = #{brithDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userPasswoed != null" >
+        USER_PASSWOED = #{userPasswoed,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhoto != null" >
+        USER_PHOTO = #{userPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="userLeve != null" >
+        USER_LEVE = #{userLeve,jdbcType=INTEGER},
+      </if>
+      <if test="userPhone != null" >
+        USER_PHONE = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null" >
+        ACCOUNT_TYPE = #{accountType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where USER_ACCOUNT = #{userAccount,jdbcType=VARCHAR} AND  USER_PASSWOED = #{userPasswoed,jdbcType=VARCHAR}
+  </update>
+</mapper>

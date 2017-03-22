@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsyl.mall.dao.MallGoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.hsyl.mall.pojo.MallGoods" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="GOODS_ID" property="goodsId" jdbcType="INTEGER" />
+    <result column="GOODS_TYPE" property="goodsType" jdbcType="VARCHAR" />
+    <result column="GOODS_PRICE" property="goodsPrice" jdbcType="DOUBLE" />
+    <result column="PRODUCT_DATE" property="productDate" jdbcType="TIMESTAMP" />
+    <result column="GOODS_PHOTO" property="goodsPhoto" jdbcType="VARCHAR" />
+    <result column="GOODS_STATUS" property="goodsStatus" jdbcType="INTEGER" />
+    <result column="GOODS_AMOUT" property="goodsAmout" jdbcType="BIGINT" />
+    <result column="GOODS_PROPER" property="goodsProper" jdbcType="INTEGER" />
+    <result column="CONTACT_TEL" property="contactTel" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, GOODS_ID, GOODS_TYPE, GOODS_PRICE, PRODUCT_DATE, GOODS_PHOTO, GOODS_STATUS, GOODS_AMOUT, 
+    GOODS_PROPER, CONTACT_TEL
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from mall_goods
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from mall_goods
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hsyl.mall.pojo.MallGoods" >
+    insert into mall_goods (ID, GOODS_ID, GOODS_TYPE, 
+      GOODS_PRICE, PRODUCT_DATE, GOODS_PHOTO, 
+      GOODS_STATUS, GOODS_AMOUT, GOODS_PROPER, 
+      CONTACT_TEL)
+    values (#{id,jdbcType=BIGINT}, #{goodsId,jdbcType=INTEGER}, #{goodsType,jdbcType=VARCHAR}, 
+      #{goodsPrice,jdbcType=DOUBLE}, #{productDate,jdbcType=TIMESTAMP}, #{goodsPhoto,jdbcType=VARCHAR}, 
+      #{goodsStatus,jdbcType=INTEGER}, #{goodsAmout,jdbcType=BIGINT}, #{goodsProper,jdbcType=INTEGER}, 
+      #{contactTel,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hsyl.mall.pojo.MallGoods" >
+    insert into mall_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="goodsId != null" >
+        GOODS_ID,
+      </if>
+      <if test="goodsType != null" >
+        GOODS_TYPE,
+      </if>
+      <if test="goodsPrice != null" >
+        GOODS_PRICE,
+      </if>
+      <if test="productDate != null" >
+        PRODUCT_DATE,
+      </if>
+      <if test="goodsPhoto != null" >
+        GOODS_PHOTO,
+      </if>
+      <if test="goodsStatus != null" >
+        GOODS_STATUS,
+      </if>
+      <if test="goodsAmout != null" >
+        GOODS_AMOUT,
+      </if>
+      <if test="goodsProper != null" >
+        GOODS_PROPER,
+      </if>
+      <if test="contactTel != null" >
+        CONTACT_TEL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsType != null" >
+        #{goodsType,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPrice != null" >
+        #{goodsPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="productDate != null" >
+        #{productDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsPhoto != null" >
+        #{goodsPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsStatus != null" >
+        #{goodsStatus,jdbcType=INTEGER},
+      </if>
+      <if test="goodsAmout != null" >
+        #{goodsAmout,jdbcType=BIGINT},
+      </if>
+      <if test="goodsProper != null" >
+        #{goodsProper,jdbcType=INTEGER},
+      </if>
+      <if test="contactTel != null" >
+        #{contactTel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hsyl.mall.pojo.MallGoods" >
+    update mall_goods
+    <set >
+      <if test="goodsId != null" >
+        GOODS_ID = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsType != null" >
+        GOODS_TYPE = #{goodsType,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPrice != null" >
+        GOODS_PRICE = #{goodsPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="productDate != null" >
+        PRODUCT_DATE = #{productDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsPhoto != null" >
+        GOODS_PHOTO = #{goodsPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsStatus != null" >
+        GOODS_STATUS = #{goodsStatus,jdbcType=INTEGER},
+      </if>
+      <if test="goodsAmout != null" >
+        GOODS_AMOUT = #{goodsAmout,jdbcType=BIGINT},
+      </if>
+      <if test="goodsProper != null" >
+        GOODS_PROPER = #{goodsProper,jdbcType=INTEGER},
+      </if>
+      <if test="contactTel != null" >
+        CONTACT_TEL = #{contactTel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hsyl.mall.pojo.MallGoods" >
+    update mall_goods
+    set GOODS_ID = #{goodsId,jdbcType=INTEGER},
+      GOODS_TYPE = #{goodsType,jdbcType=VARCHAR},
+      GOODS_PRICE = #{goodsPrice,jdbcType=DOUBLE},
+      PRODUCT_DATE = #{productDate,jdbcType=TIMESTAMP},
+      GOODS_PHOTO = #{goodsPhoto,jdbcType=VARCHAR},
+      GOODS_STATUS = #{goodsStatus,jdbcType=INTEGER},
+      GOODS_AMOUT = #{goodsAmout,jdbcType=BIGINT},
+      GOODS_PROPER = #{goodsProper,jdbcType=INTEGER},
+      CONTACT_TEL = #{contactTel,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

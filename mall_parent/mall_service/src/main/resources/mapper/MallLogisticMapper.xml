@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsyl.mall.dao.MallLogisticMapper" >
+  <resultMap id="BaseResultMap" type="com.hsyl.mall.pojo.MallLogistic" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="GOODS_ID" property="goodsId" jdbcType="INTEGER" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="GOODS_TYPE" property="goodsType" jdbcType="INTEGER" />
+    <result column="GOODS_AMOUNT" property="goodsAmount" jdbcType="BIGINT" />
+    <result column="GOODS_COUNT_SALARY" property="goodsCountSalary" jdbcType="DOUBLE" />
+    <result column="RECEVE_ADDRES" property="receveAddres" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, GOODS_ID, USER_ID, GOODS_TYPE, GOODS_AMOUNT, GOODS_COUNT_SALARY, RECEVE_ADDRES
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from mall_logistic
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from mall_logistic
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hsyl.mall.pojo.MallLogistic" >
+    insert into mall_logistic (ID, GOODS_ID, USER_ID, 
+      GOODS_TYPE, GOODS_AMOUNT, GOODS_COUNT_SALARY, 
+      RECEVE_ADDRES)
+    values (#{id,jdbcType=BIGINT}, #{goodsId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, 
+      #{goodsType,jdbcType=INTEGER}, #{goodsAmount,jdbcType=BIGINT}, #{goodsCountSalary,jdbcType=DOUBLE}, 
+      #{receveAddres,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hsyl.mall.pojo.MallLogistic" >
+    insert into mall_logistic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="goodsId != null" >
+        GOODS_ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="goodsType != null" >
+        GOODS_TYPE,
+      </if>
+      <if test="goodsAmount != null" >
+        GOODS_AMOUNT,
+      </if>
+      <if test="goodsCountSalary != null" >
+        GOODS_COUNT_SALARY,
+      </if>
+      <if test="receveAddres != null" >
+        RECEVE_ADDRES,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsType != null" >
+        #{goodsType,jdbcType=INTEGER},
+      </if>
+      <if test="goodsAmount != null" >
+        #{goodsAmount,jdbcType=BIGINT},
+      </if>
+      <if test="goodsCountSalary != null" >
+        #{goodsCountSalary,jdbcType=DOUBLE},
+      </if>
+      <if test="receveAddres != null" >
+        #{receveAddres,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hsyl.mall.pojo.MallLogistic" >
+    update mall_logistic
+    <set >
+      <if test="goodsId != null" >
+        GOODS_ID = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsType != null" >
+        GOODS_TYPE = #{goodsType,jdbcType=INTEGER},
+      </if>
+      <if test="goodsAmount != null" >
+        GOODS_AMOUNT = #{goodsAmount,jdbcType=BIGINT},
+      </if>
+      <if test="goodsCountSalary != null" >
+        GOODS_COUNT_SALARY = #{goodsCountSalary,jdbcType=DOUBLE},
+      </if>
+      <if test="receveAddres != null" >
+        RECEVE_ADDRES = #{receveAddres,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hsyl.mall.pojo.MallLogistic" >
+    update mall_logistic
+    set GOODS_ID = #{goodsId,jdbcType=INTEGER},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      GOODS_TYPE = #{goodsType,jdbcType=INTEGER},
+      GOODS_AMOUNT = #{goodsAmount,jdbcType=BIGINT},
+      GOODS_COUNT_SALARY = #{goodsCountSalary,jdbcType=DOUBLE},
+      RECEVE_ADDRES = #{receveAddres,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

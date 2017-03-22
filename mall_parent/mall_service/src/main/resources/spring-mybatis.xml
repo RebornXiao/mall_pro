@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<!-- 开启自动扫描 -->
+	<context:component-scan base-package="com.hsyl.mall" />
+
+	<!-- 引入jdbc数据源配置 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<!-- <property name="location" value="classpath:jdbc.properties" /> -->
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+				<value>classpath:redis.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 配置redis -->
+	<import resource="redis-context.xml" />
+
+
+	<!-- 配置数据源 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<!-- 初始化连接大小 -->
+		<property name="initialSize" value="${initialSize}"></property>
+		<!-- 连接池最大数量 -->
+		<property name="maxActive" value="${maxActive}"></property>
+		<!-- 连接池最大空闲 -->
+		<property name="maxIdle" value="${maxIdle}"></property>
+		<!-- 连接池最小空闲 -->
+		<property name="minIdle" value="${minIdle}"></property>
+		<!-- 获取连接最大等待时间 -->
+		<property name="maxWait" value="${maxWait}"></property>
+	</bean>
+
+	
+
+	<!-- 配置数据源解析工厂 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- 自动扫描mapping.xml文件 -->
+		<property name="mapperLocations" value="classpath*:mapper/*.xml"></property>
+	</bean>
+
+	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.hsyl.mall.dao" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+	</bean>
+	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" />
+                <tx:method name="find*" read-only="true" />
+                <tx:method name="load*" read-only="true" />
+                <tx:method name="query*" read-only="true" />
+                <tx:method name="add*" read-only="false" rollback-for="Exception" propagation="REQUIRED"/>
+                <tx:method name="save*" read-only="false" rollback-for="Exception" propagation="REQUIRED"/>
+                <tx:method name="insert*" read-only="false" rollback-for="Exception" propagation="REQUIRED"/>
+                <tx:method name="update*" read-only="false" rollback-for="Exception" propagation="REQUIRED"/>
+                <tx:method name="modify*" read-only="false" rollback-for="Exception" propagation="REQUIRED"/>
+                <tx:method name="delete*" read-only="false" rollback-for="Exception" propagation="REQUIRED"/>
+                <tx:method name="del*" read-only="false" rollback-for="Exception" propagation="REQUIRED"/>
+                <tx:method name="registe*" read-only="false" rollback-for="Exception" propagation="REQUIRED"/>
+                <tx:method name="approve*" read-only="false" rollback-for="Exception" propagation="REQUIRED"/>
+                <tx:method name="clear*" read-only="false" rollback-for="Exception" propagation="REQUIRED"/>
+                <tx:method name="set*" read-only="false" rollback-for="Exception" propagation="REQUIRED"/>
+                <tx:method name="reset*" read-only="false" rollback-for="Exception" propagation="REQUIRED"/>
+                <tx:method name="getUpdate*" read-only="false" rollback-for="Exception" propagation="REQUIRED"/>
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config expose-proxy="true">
+		<aop:pointcut id="txPointcut"
+			expression="execution(* com.hsyl.mall.service.*.*(..))" />
+		<aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice" />
+	</aop:config>
+
+</beans>
