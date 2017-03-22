@@ -5,10 +5,47 @@ Hi ¸÷Î»ÂëÅ©Ğ¡»ï°éÃÇ£¬±¾ÎÄ½«Ê¹ÓÃmavenÕûºÏdubbo¡¢spring¡¢springmvc¡¢mybatis¿ò¼Ü£¬²
 ºÃÁË£¬Ò²²»¶à·Ï»°ÁË£¬Ëµ°×ÁËÎÒÒ²Ã»¶àÉÙ·Ï»°£¬´¿ÊôÓÚ³õÑ§Õß£¬´æÔÚ²»ºÏÀí»òÕß²»ÕıÈ·µÄµØ·½£¬»¹Çë¸÷Î»¸øÓèÖ¸Õı¡£
 
 ÄúĞèÒª×¼±¸µÄ»·¾³Çåµ¥ÈçÏÂ£º
-1¡¢eclipse£º             
-  ÏÂÔØµØÖ·£º¹ÙÍø£¬×ÔĞĞ°Ù¶È°ÉÉ§Äê
-2¡¢maven£¬°æ±¾¹ÜÀí>=3.0.4
-  ÏÂÔØµØÖ·£ºhttp://maven.apache.org/download.cgi
-3¡¢zookeeper£¬×¢²áÖĞĞÄ    
-  ÏÂÔØµØÖ·£¨win£©£ºhttp://download.csdn.net/download/u013286716/7167881
-  ÅäÖÃ£ºzoo.cfg£¬ÒÔÏÂÊÇÎÒµÄÅäÖÃÎÄ¼ş£¬Çë²Î¿¼ĞŞ¸Ä
+
+1¡¢eclipse:ÏÂÔØµØÖ·£ºhttps://www.eclipse.org/downloads
+
+2¡¢maven£¬°æ±¾¹ÜÀí>=3.0.4ÏÂÔØµØÖ·£ºhttp://maven.apache.org/download.cgi
+
+3¡¢zookeeper£¬×¢²áÖĞĞÄ ÏÂÔØµØÖ·£¨win£©£ºhttp://download.csdn.net/download/u013286716/7167881
+ 
+ÅäÖÃ£ºzoo.cfg£¬ÒÔÏÂÊÇÎÒµÄÅäÖÃÎÄ¼ş£¬Çë²Î¿¼ĞŞ¸Ä
+
+# The number of milliseconds of each tick
+tickTime=2000
+# The number of ticks that the initial 
+# synchronization phase can take
+initLimit=10
+# The number of ticks that can pass between 
+# sending a request and getting an acknowledgement
+syncLimit=5
+# the directory where the snapshot is stored.
+# do not use /tmp for storage, /tmp here is just 
+# ÅäÖÃzookepper µÄÊı¾İÄ¿Â¼.ºÍzookepperµÄÈÕÖ¾Êä³öÄ¿Â¼
+dataDir=D:\\zookeeper-3.4.6\\data   
+dataLogDir=D:\\zookeeper-3.4.6\\log
+# ¿Í»§¶ËÁ¬½ÓzookerµÄ¶Ë¿ÚºÅ
+clientPort=2181
+# the maximum number of client connections.t
+# ÅäÖÃzookpperµÄ×î´óÁ¬½ÓÊı
+maxClientCnxns=60
+#
+# Be sure to read the maintenance section of the 
+# administrator guide before turning on autopurge.
+#
+# http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance
+#
+# The number of snapshots to retain in dataDir
+#autopurge.snapRetainCount=3
+# Purge task interval in hours
+# Set to "0" to disable auto purge feature
+#autopurge.purgeInterval=1
+
+
+
+
+
+
